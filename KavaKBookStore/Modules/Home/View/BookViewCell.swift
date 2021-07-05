@@ -15,9 +15,9 @@ class BookViewCell: UITableViewCell {
   
   static let identifier = "BookViewCell"
 
-    @IBOutlet weak var bookImage: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var authorLable: UILabel!
+    @IBOutlet weak private var bookImage: UIImageView!
+    @IBOutlet weak private var titleLabel: UILabel!
+    @IBOutlet weak private var authorLable: UILabel!
   
   override func prepareForReuse() {
         super.prepareForReuse()
@@ -27,8 +27,8 @@ class BookViewCell: UITableViewCell {
   }
 
   func configure(with model: BookViewModel) {
-        titleLabel.text = model.title
-        authorLable.text = model.author
+        titleLabel.text = "Title: \(model.title)"
+        authorLable.text = "Author: \(model.author)"
         bookImage.clipsToBounds = true
         bookImage.sd_setImage(with: model.image, completed: nil)
   }

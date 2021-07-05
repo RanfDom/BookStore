@@ -15,12 +15,14 @@ struct BookStore {
 
 extension BookStore: Decodable {
     private enum BookStoreApiResponseCodingKeys: String, CodingKey {
-        case BookStore = "books"
+        case results = "results"
+        case bookStore = "books"
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: BookStoreApiResponseCodingKeys.self)
-        books = try container.decode([Book].self, forKey: .BookStore)
+        let results = try container.nestedContainer(keyedBy: BookStoreApiResponseCodingKeys.self, forKey: .results)
+        books = try results.decode([Book].self, forKey: .bookStore)
     }
 }
 
@@ -43,7 +45,7 @@ extension Book: Decodable {
     case author
     case description
     case genre
-    case image
+    case image = "img"
     case imported
   }
   

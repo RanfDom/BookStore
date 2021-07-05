@@ -17,6 +17,7 @@ class HomeViewController: UIViewController, LoadableViewController, HomeViewProt
     
     func reloadViewWith(_ bookStoreViewModel: [BookStoreSectionViewModel]) {
         self.bookStoreViewModel = bookStoreViewModel
+        tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -26,7 +27,7 @@ class HomeViewController: UIViewController, LoadableViewController, HomeViewProt
 }
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
-    
+        
     func numberOfSections(in tableView: UITableView) -> Int {
         bookStoreViewModel.count
     }

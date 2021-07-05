@@ -15,11 +15,13 @@ struct BestSellers {
 
 extension BestSellers: Decodable {
     private enum BestSellersApiResponseCodingKeys: String, CodingKey {
+        case results = "results"
         case isbns = "best_sellers"
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: BestSellersApiResponseCodingKeys.self)
-        isbns = try container.decode([String].self, forKey: .isbns)
+        let results = try container.nestedContainer(keyedBy: BestSellersApiResponseCodingKeys.self, forKey: .results)
+        isbns = try results.decode([String].self, forKey: .isbns)
     }
 }
